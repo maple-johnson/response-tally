@@ -90,8 +90,58 @@ public class Tallyer
      {
       // WAVE 2
       // TODO: Implement this method
+      
+      // Run through ids, creating a new map of counts
+      Map<String, Integer> idCount = new HashMap<String, Integer>();
+      for (String item : ids) 
+      {
+          if (!idCount.containsKey(item)) 
+          {
+               idCount.put(item, 1);
+          }
+          else
+          {
+               idCount.put(item, idCount.get(item) + 1);
+          }
 
-      return null;
+      }
+
+      //
+      Map<String, Integer> filteredMap = new HashMap<String, Integer>();
+      for (String item : idCount.keySet()) // Run through the map of counts
+      {
+          if (idCount.get(item).equals(2)) // Compare the counts against the requirement of 2
+          {
+               for (int i = 0; i < ids.size(); i++) // Run through the id list
+               {
+                    if (ids.get(i).equals(item)) // If the id is safe add to the returned map
+                    {
+                         if (!filteredMap.containsKey(topics.get(i))) 
+                         {
+                              filteredMap.put(topics.get(i), 1);
+                         }
+                         else
+                         {
+                              filteredMap.put(topics.get(i), filteredMap.get(topics.get(i)) + 1);
+                         }
+                    }
+                    else // if the id is offendinng don't add to map
+                    {
+                         // Do nothing
+                    }
+
+               }
+
+          }
+          else // if the compare count isn't 2, just ignore
+          {
+               // Do nothing
+          }
+
+      }
+
+      return filteredMap;
+      
      }
 
 }
